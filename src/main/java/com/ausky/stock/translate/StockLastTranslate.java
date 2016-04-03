@@ -98,7 +98,7 @@ public class StockLastTranslate
         {
             //获取股票的最新复权日期
             String translateTable = stockTable + "F";
-            StringBuilder _sql = new StringBuilder( "select tradedate,close from " + translateTable );
+            StringBuilder _sql = new StringBuilder( "select tradedate,close from " + translateTable +" order by tradedate desc");
 
             PreparedStatement queryStatement = DBUtil.getConnection2().prepareStatement( _sql.toString() );
 
@@ -123,6 +123,8 @@ public class StockLastTranslate
             {
                 _queryMarketSql.append( " and tradedate > :tradedate" );
             }
+
+            _queryMarketSql.append( " order by tradedate asc" );
 
             PreparedStatement _queryMarketStatement = DBUtil.getConnection2().prepareStatement( _queryMarketSql.toString() );
             if ( startDate != null )
@@ -160,21 +162,20 @@ public class StockLastTranslate
             {
                 double translateRatio = lastClose == null ? 1.0 : ( lastClose * ( 1 + Double.valueOf( stockMarketHQ.getIncreaseRatio() ) ) / Double.valueOf( stockMarketHQ.getClose() ) );
 
-                if ( lastClose == null )
-                {
-                    insertStatement.setString( 1, stockMarketHQ.getTradeDate() );
-                    insertStatement.setDouble( 2, Double.valueOf( stockMarketHQ.getOpen() ) * translateRatio );
-                    insertStatement.setDouble( 3, Double.valueOf( stockMarketHQ.getClose() ) * translateRatio );
-                    insertStatement.setDouble( 4, Double.valueOf( stockMarketHQ.getIncreaseMoney() ) * translateRatio );
-                    insertStatement.setDouble( 5, Double.valueOf( stockMarketHQ.getIncreaseRatio() ) );
-                    insertStatement.setDouble( 6, Double.valueOf( stockMarketHQ.getLow() ) * translateRatio );
-                    insertStatement.setDouble( 7, Double.valueOf( stockMarketHQ.getHigh() ) * translateRatio );
-                    insertStatement.setDouble( 8, Double.valueOf( stockMarketHQ.getTradingHand() ) );
-                    insertStatement.setDouble( 9, Double.valueOf( stockMarketHQ.getTradingVolume() ) * translateRatio );
-                    insertStatement.setDouble( 10, Double.valueOf( stockMarketHQ.getChangeRatio() ) );
+                lastClose = Double.valueOf( stockMarketHQ.getClose() ) * translateRatio;
 
-                    insertStatement.addBatch();
-                }
+                insertStatement.setString( 1, stockMarketHQ.getTradeDate() );
+                insertStatement.setDouble( 2, Double.valueOf( stockMarketHQ.getOpen() ) * translateRatio );
+                insertStatement.setDouble( 3, Double.valueOf( stockMarketHQ.getClose() ) * translateRatio );
+                insertStatement.setDouble( 4, Double.valueOf( stockMarketHQ.getIncreaseMoney() ) * translateRatio );
+                insertStatement.setDouble( 5, Double.valueOf( stockMarketHQ.getIncreaseRatio() ) );
+                insertStatement.setDouble( 6, Double.valueOf( stockMarketHQ.getLow() ) * translateRatio );
+                insertStatement.setDouble( 7, Double.valueOf( stockMarketHQ.getHigh() ) * translateRatio );
+                insertStatement.setDouble( 8, Double.valueOf( stockMarketHQ.getTradingHand() ) );
+                insertStatement.setDouble( 9, Double.valueOf( stockMarketHQ.getTradingVolume() ) * translateRatio );
+                insertStatement.setDouble( 10, Double.valueOf( stockMarketHQ.getChangeRatio() ) );
+
+                insertStatement.addBatch();
             }
 
             insertStatement.executeBatch();

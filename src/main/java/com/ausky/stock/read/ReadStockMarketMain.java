@@ -63,6 +63,6 @@ public class ReadStockMarketMain
 
         ReadStockMarket.TOADY_STR = today;
 
-        ReadStockMarket.readHisStockMarket( today, today );
+        ReadStockMarket.readHisStockMarket( "20160205", today );
     }
 }
