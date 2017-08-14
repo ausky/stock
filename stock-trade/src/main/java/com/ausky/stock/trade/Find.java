@@ -17,6 +17,7 @@
  */
 package com.ausky.stock.trade;
 
+import com.ausky.stock.log.LogUtil;
 import com.ausky.stock.util.DBUtil;
 
 import java.sql.*;
@@ -74,7 +75,7 @@ public class Find
                 {
                     if ( continuous >= MIN_CONTINUS_DAY && todayOpen > lastOpen )
                     {
-                        System.out.println( "买入日期:" + queryResult.getString( "tradedate" ) + ";买入价格:" + todayClose );
+                        LogUtil.info(( "买入日期:" + queryResult.getString( "tradedate" ) + ";买入价格:" + todayClose ));
                         return queryResult.getString( "tradedate" );
                     }
                     continuous = 0;
@@ -134,7 +135,7 @@ public class Find
 
                 if ( day_fall >= MAX_DAY_FALL_RATIO || total_fall >= MAX_TOTAL_FALL_RATIO )
                 {
-                    System.out.println( "卖出日期:" + queryResult.getString( "tradedate" ) + ";卖出价格:" + todayClose );
+                    LogUtil.info(( "卖出日期:" + queryResult.getString( "tradedate" ) + ";卖出价格:" + todayClose ));
                     return queryResult.getString( "tradedate" );
                 }
 

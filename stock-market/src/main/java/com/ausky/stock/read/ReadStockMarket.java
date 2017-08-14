@@ -18,6 +18,7 @@
 package com.ausky.stock.read;
 
 import com.ausky.stock.bean.*;
+import com.ausky.stock.log.LogUtil;
 import com.ausky.stock.util.*;
 import net.sf.json.*;
 import org.apache.commons.lang.StringUtils;
@@ -322,7 +323,7 @@ public class ReadStockMarket
                         _url.append( "&end=" );
                         _url.append( ( i + 1 ) * period + Integer.parseInt( startTime ) > Integer.parseInt( endTime ) ? endTime : "" + ( ( i + 1 ) * period + Integer.parseInt( startTime ) ) );
 
-                        String stockHQ = HttpClientUtil.get( _url.toString() );
+                        String stockHQ = HttpClientUtil.getInstance().get( _url.toString() );
 
                         if ( "{}".equals( stockHQ.trim() ) )
                         {
@@ -334,7 +335,7 @@ public class ReadStockMarket
                     //完成
                     insertFinishTable( ( stockInfo.getStockMarket() + stockInfo.getStockCode() ).toUpperCase() );
                 }
-                System.out.println( "end!" );
+                LogUtil.info( "end!" );
             } catch ( Exception ex )
             {
                 ex.printStackTrace();

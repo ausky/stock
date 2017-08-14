@@ -17,6 +17,7 @@
  */
 package com.ausky.stock.util;
 
+import com.ausky.stock.log.LogUtil;
 import junit.framework.TestCase;
 
 import java.util.Date;
@@ -36,6 +37,6 @@ public class AnalysisStockUtilTest extends TestCase
         //  使用连接池的 耗时：4156
         Date now = new Date();
         AnalysisStockUtil.analysisStockInfo();
-        System.out.println( "耗时：" + ( new Date().getTime() - now.getTime() ) );
+        LogUtil.info( "耗时：" + ( new Date().getTime() - now.getTime() ) );
     }
 }

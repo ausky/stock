@@ -17,6 +17,8 @@
  */
 package com.ausky.stock.read;
 
+import com.ausky.stock.log.LogUtil;
+
 import java.io.*;
 import java.util.*;
 
@@ -42,13 +44,13 @@ public class Run
             exec( commands );
             if ( find )
             {
-                System.out.println( "success" );
-                System.out.println( "success" );
-                System.out.println( "success" );
-                System.out.println( i );
+                LogUtil.info( "success" );
+                LogUtil.info( "success" );
+                LogUtil.info( "success" );
+                LogUtil.info( i );
             } else
             {
-                System.out.println( i + " faild" );
+                LogUtil.info( i + " faild" );
             }
         }
 

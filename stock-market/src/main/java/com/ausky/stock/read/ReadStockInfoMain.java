@@ -17,6 +17,8 @@
  */
 package com.ausky.stock.read;
 
+import com.ausky.stock.util.HttpClientUtil;
+
 /**
  * Created with IntelliJ IDEA.
  * User: hy.ao
@@ -26,4 +28,12 @@ package com.ausky.stock.read;
  */
 public class ReadStockInfoMain
 {
+    public static void main( String[] args ) throws Exception
+    {
+        HttpClientUtil httpClientUtil = HttpClientUtil.getInstance();
+
+        LoginXueqiu.login( httpClientUtil );
+
+        ReadStockInfo.readStockInfoFromXueQiu( httpClientUtil );
+    }
 }

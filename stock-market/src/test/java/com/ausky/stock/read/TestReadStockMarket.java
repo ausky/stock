@@ -17,6 +17,7 @@
  */
 package com.ausky.stock.read;
 
+import com.ausky.stock.log.LogUtil;
 import com.ausky.stock.read.ReadStockMarket;
 import junit.framework.TestCase;
 
@@ -38,6 +39,6 @@ public class TestReadStockMarket extends TestCase
         {
             ex.printStackTrace();
         }
-        System.out.println( 111 );
+        LogUtil.info( 111 );
     }
 }

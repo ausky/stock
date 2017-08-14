@@ -17,6 +17,7 @@
  */
 package com.ausky.stock.util;
 
+import com.ausky.stock.log.LogUtil;
 import junit.framework.TestCase;
 
 import java.util.*;
@@ -45,7 +46,7 @@ public class HttpClientUtilTest extends TestCase
         params.put( "_", "1454824023081" );
 
 //        HttpClientUtil.get( "http://xueqiu.com/stock/quote_order.json?page=1&size=90&order=asc&exchange=CN&stockType=sza&column=symbol%2Cname%2Ccurrent%2Cchg%2Cpercent%2Clast_close%2Copen%2Chigh%2Clow%2Cvolume%2Camount%2Cmarket_capital%2Cpe_ttm%2Chigh52w%2Clow52w%2Chasexist&orderBy=amount&_=1454824023081" );
-        HttpClientUtil.get( url );
+        HttpClientUtil.getInstance().get( url );
     }
 
     public void testGet2() throws Exception
@@ -55,6 +56,40 @@ public class HttpClientUtilTest extends TestCase
 
     public void testGet3() throws Exception
     {
-        HttpClientUtil.get( "http://www.baidu.com/s?wd=q&rsv_spt=1&rsv_iqid=0x8e9ca3d9003171ca&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=0&rsv_sug3=2&rsv_sug1=1&prefixsug=q&rsp=0&rsv_sug7=100&inputT=1878&rsv_sug4=1959" );
+        HttpClientUtil.getInstance().get( "http://www.baidu.com/s?wd=q&rsv_spt=1&rsv_iqid=0x8e9ca3d9003171ca&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=0&rsv_sug3=2&rsv_sug1=1&prefixsug=q&rsp=0&rsv_sug7=100&inputT=1878&rsv_sug4=1959" );
     }
+
+
+    public void testLogin() throws Exception
+    {
+
+        StringBuilder paramStr = new StringBuilder();
+
+        paramStr.append( "username" ).append( "=" ).append( "aohaisong1990516@126.com" ).append( "&" ).append( "password" ).append( "=" ).append( "1234qwer" );
+
+        Map<String, String> params = new HashMap<String, String>();
+
+        params.put( "username", "aohaisong1990516@126.com" );
+        params.put( "password", "1234qwer" );
+
+        HttpClientUtil.getInstance().post( "https://xueqiu.com//snowman/login", paramStr.toString() );
+    }
+
+
+    public void testGetStock() throws Exception
+    {
+
+        StringBuilder paramStr = new StringBuilder();
+        paramStr.append( "username" ).append( "=" ).append( "aohaisong1990516@126.com" ).append( "&" ).append( "password" ).append( "=" ).append( "1234qwer" );
+        HttpClientUtil clientUtil = HttpClientUtil.getInstance();
+
+        clientUtil.post( "https://xueqiu.com//snowman/login", paramStr.toString() );
+
+
+        String result = clientUtil.get( "http://xueqiu.com/stock/quote_order.json?page=2&size=90&order=asc&exchange=CN&stockType=sha&column=symbol&orderBy=amount" );
+        result = clientUtil.get( "https://xueqiu.com/stock/cata/stocklist.json?page=2&size=30&order=desc&orderby=percent&type=11%2C12&_=1502508395783" );
+
+        LogUtil.info( result );
+    }
+
 }

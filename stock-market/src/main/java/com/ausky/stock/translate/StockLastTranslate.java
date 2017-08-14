@@ -18,6 +18,7 @@
 package com.ausky.stock.translate;
 
 import com.ausky.stock.bean.StockMarket;
+import com.ausky.stock.log.LogUtil;
 import com.ausky.stock.util.DBUtil;
 
 import java.sql.*;
@@ -216,7 +217,7 @@ public class StockLastTranslate
 
                     stockTranslate( stockInfo );
                 }
-                System.out.println( "end!" );
+                LogUtil.info( "end!" );
             } catch ( Exception ex )
             {
                 ex.printStackTrace();

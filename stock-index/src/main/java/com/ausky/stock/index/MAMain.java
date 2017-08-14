@@ -17,11 +17,6 @@
  */
 package com.ausky.stock.index;
 
-import com.ausky.stock.util.DBUtil;
-
-import java.sql.*;
-import java.util.*;
-
 /**
  * Created with IntelliJ IDEA.
  * User: 敖海样

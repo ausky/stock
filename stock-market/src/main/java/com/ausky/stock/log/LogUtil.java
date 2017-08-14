@@ -26,4 +26,22 @@ package com.ausky.stock.log;
  */
 public class LogUtil
 {
+    public static void info( Object message )
+    {
+        System.out.println( message );
+    }
+
+    public static void error( String message )
+    {
+        System.out.println( message );
+    }
+
+    public static void error( String message, Throwable throwable )
+    {
+        System.out.println( message );
+        if ( throwable != null )
+        {
+            throwable.printStackTrace();
+        }
+    }
 }

@@ -19,12 +19,11 @@ package com.ausky.stock.index;
 
 import com.ausky.stock.bean.MABean;
 import com.ausky.stock.enums.MAType;
+import com.ausky.stock.log.LogUtil;
 import com.ausky.stock.util.DBUtil;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -244,7 +243,7 @@ public class MA
 
                     calcMA( stockInfo, stockInfo + "MA", new MAType[]{ MAType.MA5, MAType.MA20, MAType.MA30, MAType.MA60 } );
                 }
-                System.out.println( "end!" );
+                LogUtil.info( "end!" );
             } catch ( Exception ex )
             {
                 ex.printStackTrace();

@@ -17,6 +17,7 @@
  */
 package com.ausky.stock.util;
 
+import com.ausky.stock.log.LogUtil;
 import junit.framework.TestCase;
 
 import java.sql.*;
@@ -43,7 +44,7 @@ public class DBUtilTest extends TestCase
 
             while ( resultSet.next() )
             {
-                System.out.println( resultSet.getObject( 1 ) );
+                LogUtil.info( resultSet.getObject( 1 ) );
             }
         } catch ( Exception ex )
         {
@@ -66,7 +67,7 @@ public class DBUtilTest extends TestCase
 
             while ( resultSet.next() )
             {
-                System.out.println( resultSet.getObject( 1 ) );
+                LogUtil.info(( resultSet.getObject( 1 ) ));
             }
         } catch ( Exception ex )
         {

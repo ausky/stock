@@ -17,6 +17,7 @@
  */
 package com.ausky.stock.trade;
 
+import com.ausky.stock.log.LogUtil;
 import com.ausky.stock.util.DBUtil;
 import junit.framework.TestCase;
 
@@ -34,7 +35,6 @@ public class FindTest extends TestCase
 
     public void testTrade() throws Exception
     {
-//        System.out.println( "从20070101至20160105" );
         int volume = 1000;
 
         String startDate = "20070101";
@@ -67,8 +67,8 @@ public class FindTest extends TestCase
             }
             isBuy = !isBuy;
         }
-        System.out.println( "每次交易1000股，累计收益：" + totalMoney + ";收益率:" );
-        System.out.println( "总共投资次数：" + totalTradeTimes + "盈利次数:" + getMoneyTimes + ",盈亏比例" + ( getMoneyTimes * 1.0 / totalTradeTimes * 100 ) + "%" );
+        LogUtil.info( "每次交易1000股，累计收益：" + totalMoney + ";收益率:" );
+        LogUtil.info( "总共投资次数：" + totalTradeTimes + "盈利次数:" + getMoneyTimes + ",盈亏比例" + ( getMoneyTimes * 1.0 / totalTradeTimes * 100 ) + "%" );
     }
 
     private Double getPrice( String stockcode, String stockMarket, String startDate ) throws Exception
